@@ -238,6 +238,11 @@ read_int :: proc(str: ^string, ret: $T/^$E) -> bool
         sign = -1;
         idx += 1;
     }
+    else if str[idx] == '+'
+    {
+        sign = 1;
+        idx += 1;
+    }
     
     for idx < len(str) && '0' <= str[idx] && str[idx] <= '9'
     {
