@@ -3,6 +3,7 @@ package main
 import "core:fmt"
 import "core:os"
 import "core:strings"
+import "core:time"
 
 import "../util"
 
@@ -29,6 +30,8 @@ Block :: struct
 
 main :: proc()
 {
+    start_time := time.now();
+    
     using util;
     inputb, ok := os.read_entire_file("input");
     input := string(inputb);
@@ -133,7 +136,9 @@ main :: proc()
         }
     }
     
+    end_time := time.now();
     fmt.println(acc);
+    fmt.printf("Elapsed Time: %d\n", time.duration_microseconds(time.diff(start_time, end_time)));
 }
 
 // Check for a way to enter this block or one of its predecessors
@@ -144,8 +149,10 @@ find_candidate :: proc(blocks: [dynamic]^Block, block: ^Block) -> int
     
     neighbor := blocks[block.idx-1];
     if neighbor.live do return neighbor.end; // Remove `jmp` from neighbor
-    for pred in block.nop_predecessors do 
+    for pred in block.nop_predecessors 
+    {
         if pred.block.live do return pred.instr; // Use `nop` to jump into this block
+    }
     
     for pred in block.predecessors
     {
@@ -157,7 +164,9 @@ find_candidate :: proc(blocks: [dynamic]^Block, block: ^Block) -> int
 
 get_block_from_pc :: proc(blocks: [dynamic]^Block, pc: int) -> ^Block
 {
-    for b in blocks do
+    for b in blocks
+    {
         if b.start <= pc && pc <= b.end do return b;
+    }
     return nil;
 }
