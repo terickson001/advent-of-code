@@ -23,7 +23,7 @@ main :: proc()
     item: Item;
     for
     {
-        ok := read_fmt(&input, "%d,", &item);
+        ok := read_fmt(&input, "%v,", &item);
         append(&items, item);
         if !ok do break;
     }
@@ -33,7 +33,7 @@ main :: proc()
     for
     {
         ok: bool;
-        for i in 0..<25 do ok = read_fmt(&input, "%>%d", &board[i].n);
+        for i in 0..<25 do ok = read_fmt(&input, "%>%v", &board[i].n);
         if !ok do break;
         append(&boards, board);
     }
