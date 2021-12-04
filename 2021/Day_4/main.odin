@@ -32,12 +32,8 @@ main :: proc()
     board: Board;
     for
     {
-        ok := read_fmt(&input, "%>%d%_%d%_%d%_%d%_%d%>%d%_%d%_%d%_%d%_%d%>%d%_%d%_%d%_%d%_%d%>%d%_%d%_%d%_%d%_%d%>%d%_%d%_%d%_%d%_%d",
-                       &board[0*5+0].n,&board[0*5+1].n,&board[0*5+2].n,&board[0*5+3].n,&board[0*5+4].n,
-                       &board[1*5+0].n,&board[1*5+1].n,&board[1*5+2].n,&board[1*5+3].n,&board[1*5+4].n,
-                       &board[2*5+0].n,&board[2*5+1].n,&board[2*5+2].n,&board[2*5+3].n,&board[2*5+4].n,
-                       &board[3*5+0].n,&board[3*5+1].n,&board[3*5+2].n,&board[3*5+3].n,&board[3*5+4].n,
-                       &board[4*5+0].n,&board[4*5+1].n,&board[4*5+2].n,&board[4*5+3].n,&board[4*5+4].n);
+        ok: bool;
+        for i in 0..<25 do ok = read_fmt(&input, "%>%d", &board[i].n);
         if !ok do break;
         append(&boards, board);
     }
