@@ -91,9 +91,9 @@ mark_number :: proc(board: ^Board, n: u8) -> int
 
 check_row :: proc(board: Board, idx: int) -> b8
 {
-    for i in idx*5..<idx*5+5
+    for i in 0..<5
     {
-        if !board[i].b do return false;
+        if !board[idx*5*i].b do return false;
     }
     return true;
 }
